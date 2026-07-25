@@ -1,0 +1,6 @@
+{
+  "name": "DOV India | Electric Mobility & CSR Foundation",
+  "description": "Unified modern digital portal for DOV Group, integrating EVDov Electric Mobility and DOV CSR Foundation with interactive vehicle showcase, impact metrics, donation gateways, and WhatsApp lead funnels.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

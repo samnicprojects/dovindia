@@ -1,0 +1,93 @@
+import { ProjectItem } from '../types';
+
+export const PROJECTS_DATA: ProjectItem[] = [
+  {
+    id: 'proj-1',
+    title: 'Western Ghats Bio-Shield Afforestation Drive',
+    category: 'Environment Protection',
+    status: 'Ongoing',
+    location: 'Satara & Mahabaleshwar Belt, MH',
+    targetGoal: '1,00,000 Native Banyan & Neem Trees',
+    achieved: '62,400 Trees Planted',
+    progressPercent: 62,
+    image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80',
+    description: 'Planting dense Miyawaki native forests along landslides-prone hill slopes to prevent soil erosion and rebuild tiger habitat corridors.',
+    beneficiariesCount: 45000,
+    startDate: 'Jan 2024',
+    endDate: 'Dec 2026'
+  },
+  {
+    id: 'proj-2',
+    title: 'Solar Microgrids for 50 Rural Zilla Parishad Schools',
+    category: 'Solar Energy & Education',
+    status: 'Ongoing',
+    location: 'Marathwada & Vidarbha, MH',
+    targetGoal: '50 Schools Off-Grid Solarized',
+    achieved: '38 Schools Powered',
+    progressPercent: 76,
+    image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80',
+    description: 'Installing 5kW rooftop solar panels with lithium iron phosphate battery banks in unpowered village schools for 24/7 digital smart classrooms.',
+    beneficiariesCount: 19000,
+    startDate: 'Mar 2024',
+    endDate: 'Aug 2026'
+  },
+  {
+    id: 'proj-3',
+    title: 'Clean Water Reverse Osmosis Kiosks in Drought Belts',
+    category: 'Healthcare & Water',
+    status: 'Completed',
+    location: 'Latur & Solapur Districts, MH',
+    targetGoal: '20 Solar RO Filtration Hubs',
+    achieved: '22 Hubs Installed & Operational',
+    progressPercent: 100,
+    image: 'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80',
+    description: 'Constructed solar-powered community water purification kiosks serving fluoride-free drinking water at zero cost to 22 rural villages.',
+    beneficiariesCount: 38000,
+    startDate: 'Jun 2023',
+    endDate: 'Dec 2024'
+  },
+  {
+    id: 'proj-4',
+    title: 'Women EV Driver Skilling & Micro-Franchise Hub',
+    category: 'Women Empowerment',
+    status: 'Ongoing',
+    location: 'Pune, Thane & Nagpur, MH',
+    targetGoal: '1,000 Trained Women EV Drivers',
+    achieved: '620 Drivers Certified',
+    progressPercent: 62,
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80',
+    description: 'Providing commercial driving licenses, zero-interest electric 3-wheeler loans, and last-mile delivery tie-ups for low-income women.',
+    beneficiariesCount: 6200,
+    startDate: 'Sep 2024',
+    endDate: 'Nov 2026'
+  },
+  {
+    id: 'proj-5',
+    title: 'Pediatric Cancer ICU Ward Emergency Support',
+    category: 'Emergency Medical',
+    status: 'Ongoing',
+    location: 'Mumbai & Pune Hospitals',
+    targetGoal: 'INR 1.5 Crore Patient Subsidies',
+    achieved: 'INR 1.1 Crore Disbursed',
+    progressPercent: 73,
+    image: 'https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80',
+    description: 'Sponsoring chemotherapy, bone marrow transplants, and pediatric ICU bed charges for children from Below Poverty Line (BPL) families.',
+    beneficiariesCount: 420,
+    startDate: 'Ongoing Initiative'
+  },
+  {
+    id: 'proj-6',
+    title: 'Flood Emergency Response Unit Deployment',
+    category: 'Disaster Relief',
+    status: 'Completed',
+    location: 'Kolhapur & Sangli Flood Zones',
+    targetGoal: '10,000 Dry Ration & Water Kits',
+    achieved: '12,500 Kits Distributed',
+    progressPercent: 100,
+    image: 'https://images.unsplash.com/photo-1547683905-f686c993aae5?auto=format&fit=crop&w=800&q=80',
+    description: 'Dispatched emergency boats, water purification tablets, dry food, and temporary shelter tents within 12 hours of monsoon flooding.',
+    beneficiariesCount: 52000,
+    startDate: 'Jul 2024',
+    endDate: 'Sep 2024'
+  }
+];
