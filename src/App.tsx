@@ -24,8 +24,28 @@ import { FranchiseModal } from './components/FranchiseModal';
 import { TestDriveModal } from './components/TestDriveModal';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { TermsPage } from './components/TermsPage';
+import { MaintenancePage } from './components/MaintenancePage';
+import { maintenanceConfig } from './data/Maintenance';
 
 export default function App() {
+  const [isBypassed, setIsBypassed] = useState<boolean>(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const bypassParam = urlParams.get('bypass')?.toLowerCase();
+    const adminParam = urlParams.get('admin');
+
+    if (urlParams.get('clear') === 'true' || bypassParam === 'false' || bypassParam === 'off') {
+      sessionStorage.removeItem('dov_maintenance_bypass');
+      localStorage.removeItem('dov_maintenance_bypass');
+      return false;
+    }
+
+    if (bypassParam === maintenanceConfig.bypassSecret.toLowerCase() || bypassParam === 'true' || adminParam === 'true') {
+      sessionStorage.setItem('dov_maintenance_bypass', 'true');
+      return true;
+    }
+    return sessionStorage.getItem('dov_maintenance_bypass') === 'true' || localStorage.getItem('dov_maintenance_bypass') === 'true';
+  });
+
   const [currentMode, setCurrentMode] = useState<PageMode>('home');
   const [activeOptionId, setActiveOptionId] = useState<string | undefined>(undefined);
   const [isDonationOpen, setIsDonationOpen] = useState(false);
@@ -33,6 +53,10 @@ export default function App() {
   const [isFranchiseOpen, setIsFranchiseOpen] = useState(false);
   const [isTestDriveOpen, setIsTestDriveOpen] = useState(false);
   const [testDriveScooterId, setTestDriveScooterId] = useState<string | undefined>(undefined);
+
+  if (maintenanceConfig.isEnabled && !isBypassed) {
+    return <MaintenancePage onBypass={() => setIsBypassed(true)} />;
+  }
 
   const handleNavigate = (mode: PageMode, optionId?: string) => {
     setCurrentMode(mode);
