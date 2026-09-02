@@ -5,9 +5,6 @@ import { HeroSection } from './components/sections/HeroSection';
 import { CounterSection } from './components/sections/CounterSection';
 import { AboutSection } from './components/sections/AboutSection';
 import { FocusBentoGrid } from './components/sections/FocusBentoGrid';
-import { ImpactStoriesSection } from './components/sections/ImpactStoriesSection';
-import { VolunteerCTASection } from './components/sections/VolunteerCTASection';
-import { DonationSection } from './components/sections/DonationSection';
 import { TestimonialsSection } from './components/sections/TestimonialsSection';
 import { PartnersSlider } from './components/sections/PartnersSlider';
 import { FAQSection } from './components/sections/FAQSection';
@@ -18,8 +15,8 @@ import { ProgrammesSection } from './components/ProgrammesSection';
 import { EmergencyCasesSection } from './components/EmergencyCasesSection';
 import { BankDetailsSection } from './components/BankDetailsSection';
 import { EvMobilitySection } from './components/EvMobilitySection';
+import { ProductsSection } from './components/ProductsSection';
 import { ContactUsSection } from './components/ContactUsSection';
-import { DonationModal } from './components/DonationModal';
 import { FranchiseModal } from './components/FranchiseModal';
 import { TestDriveModal } from './components/TestDriveModal';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
@@ -48,8 +45,6 @@ export default function App() {
 
   const [currentMode, setCurrentMode] = useState<PageMode>('home');
   const [activeOptionId, setActiveOptionId] = useState<string | undefined>(undefined);
-  const [isDonationOpen, setIsDonationOpen] = useState(false);
-  const [isVolunteerOpen, setIsVolunteerOpen] = useState(false);
   const [isFranchiseOpen, setIsFranchiseOpen] = useState(false);
   const [isTestDriveOpen, setIsTestDriveOpen] = useState(false);
   const [testDriveScooterId, setTestDriveScooterId] = useState<string | undefined>(undefined);
@@ -85,6 +80,8 @@ export default function App() {
         setCurrentMode('terms-and-conditions');
       } else if (path === '/ev-mobility' || path === '/ev' || hash === '#ev') {
         setCurrentMode('ev');
+      } else if (path === '/products' || path === '/bikes' || hash === '#products' || hash === '#bikes') {
+        setCurrentMode('products');
       } else if (path === '/about' || hash === '#about') {
         setCurrentMode('about');
       } else if (path === '/what-we-do' || hash === '#what-we-do') {
@@ -97,8 +94,6 @@ export default function App() {
         setCurrentMode('bank-details');
       } else if (path === '/contact' || hash === '#contact') {
         setCurrentMode('contact');
-      } else if (path === '/donate' || hash === '#donate') {
-        setCurrentMode('donate');
       } else if (path === '' || path === '/') {
         setCurrentMode('home');
       }
@@ -123,89 +118,68 @@ export default function App() {
     }
   };
 
-  const handleOpenDonation = () => {
-    if (currentMode === 'home') {
-      const donateSection = document.getElementById('donate');
-      if (donateSection) {
-        donateSection.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
-    }
-    setIsDonationOpen(true);
-  };
-
-  const handleOpenVolunteer = () => {
-    if (currentMode === 'home') {
-      const volunteerSection = document.getElementById('volunteer');
-      if (volunteerSection) {
-        volunteerSection.scrollIntoView({ behavior: 'smooth' });
-        return;
-      }
-    }
-    setIsVolunteerOpen(true);
-  };
-
   const handleOpenTestDrive = (scooterId?: string) => {
     if (scooterId) setTestDriveScooterId(scooterId);
     setIsTestDriveOpen(true);
   };
 
   const handleOpenWhatsApp = (intent?: string) => {
-    const text = intent ? encodeURIComponent(intent) : encodeURIComponent('Hello! I would like to inquire about DOV India.');
+    const text = intent ? encodeURIComponent(intent) : encodeURIComponent('Hello! I would like to inquire about EVDov Electric Scooters.');
     window.open(`https://api.whatsapp.com/send/?phone=917098555333&text=${text}&type=phone_number&app_absent=0`, '_blank');
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-[#475569] font-sans antialiased selection:bg-[#165DFF] selection:text-white flex flex-col justify-between">
-      {/* 1. Floating Glassmorphism Navbar with Full Menus & Submenus */}
+    <div className="min-h-screen bg-[#F8FAFC] text-[#475569] font-sans antialiased selection:bg-[#0D6EFD] selection:text-white flex flex-col justify-between">
+      {/* 1. Header Navigation */}
       <NavbarSection
         currentMode={currentMode}
         onNavigate={handleNavigate}
-        onOpenDonation={handleOpenDonation}
-        onOpenVolunteer={handleOpenVolunteer}
+        onOpenDonation={() => handleNavigate('products')}
+        onOpenVolunteer={() => handleOpenTestDrive()}
       />
 
       <main className="flex-grow">
         {currentMode === 'home' && (
           <>
-            {/* 2. Full-Screen Hero */}
+            {/* 2. Full-Screen EV Scooter Hero */}
             <HeroSection
-              onOpenDonation={handleOpenDonation}
-              onOpenVolunteer={handleOpenVolunteer}
-              onNavigateSection={handleNavigateSection}
+              onOpenTestDrive={() => handleOpenTestDrive()}
+              onOpenFranchise={() => setIsFranchiseOpen(true)}
+              onNavigateProducts={() => handleNavigate('products')}
             />
 
-            {/* 3. Animated Impact Statistics Counters */}
+            {/* 3. EV Performance Statistics */}
             <CounterSection />
 
-            {/* 4. About the Organization Section (Split Layout) */}
+            {/* 4. Featured Top 4 EV Scooter Products Catalog */}
+            <ProductsSection
+              isHomePage={true}
+              onNavigateProducts={() => handleNavigate('products')}
+              onOpenTestDrive={handleOpenTestDrive}
+              onOpenFranchise={() => setIsFranchiseOpen(true)}
+              onOpenWhatsApp={handleOpenWhatsApp}
+            />
+
+            {/* 5. About EVDov Electric Mobility */}
             <AboutSection
-              onOpenDonation={handleOpenDonation}
-              onOpenVolunteer={handleOpenVolunteer}
+              onOpenTestDrive={() => handleOpenTestDrive()}
+              onOpenFranchise={() => setIsFranchiseOpen(true)}
             />
 
-            {/* 5. Focus Areas Bento Grid */}
+            {/* 6. EV Core Pillars Bento Grid */}
             <FocusBentoGrid
-              onSelectFocus={(id) => handleOpenDonation()}
-              onOpenDonation={handleOpenDonation}
+              onSelectFocus={() => handleOpenTestDrive()}
+              onOpenTestDrive={() => handleOpenTestDrive()}
+              onOpenFranchise={() => setIsFranchiseOpen(true)}
             />
 
-            {/* 6. Featured Impact Stories */}
-            <ImpactStoriesSection onOpenDonation={handleOpenDonation} />
-
-            {/* 7. Volunteer Call-to-Action Section */}
-            <VolunteerCTASection />
-
-            {/* 9. Donation Section with Preset Amounts */}
-            <DonationSection />
-
-            {/* 10. Testimonials Carousel */}
+            {/* 7. Customer Reviews & Testimonials */}
             <TestimonialsSection />
 
-            {/* 13. Partner Logo Slider */}
+            {/* 8. Partner Logo Slider */}
             <PartnersSlider />
 
-            {/* 14. FAQ Accordion */}
+            {/* 9. EV Subsidies & Battery FAQ */}
             <FAQSection />
           </>
         )}
@@ -221,34 +195,42 @@ export default function App() {
           <WhatWeDoSection
             onNavigate={handleNavigate}
             onOpenTestDrive={handleOpenTestDrive}
-            onOpenDonation={handleOpenDonation}
+            onOpenDonation={() => handleNavigate('products')}
           />
         )}
 
         {currentMode === 'programmes' && (
           <ProgrammesSection
             initialProgrammeId={activeOptionId}
-            onOpenDonation={() => handleOpenDonation()}
+            onOpenDonation={() => handleNavigate('products')}
             onOpenWhatsApp={handleOpenWhatsApp}
           />
         )}
 
         {currentMode === 'emergency' && (
           <EmergencyCasesSection
-            onOpenDonation={() => handleOpenDonation()}
+            onOpenDonation={() => handleNavigate('products')}
             onOpenWhatsApp={handleOpenWhatsApp}
           />
         )}
 
         {currentMode === 'bank-details' && (
           <BankDetailsSection
-            onOpenDonation={() => handleOpenDonation()}
+            onOpenDonation={() => handleNavigate('products')}
             onOpenWhatsApp={handleOpenWhatsApp}
           />
         )}
 
         {currentMode === 'ev' && (
           <EvMobilitySection
+            onOpenTestDrive={handleOpenTestDrive}
+            onOpenFranchise={() => setIsFranchiseOpen(true)}
+            onOpenWhatsApp={handleOpenWhatsApp}
+          />
+        )}
+
+        {currentMode === 'products' && (
+          <ProductsSection
             onOpenTestDrive={handleOpenTestDrive}
             onOpenFranchise={() => setIsFranchiseOpen(true)}
             onOpenWhatsApp={handleOpenWhatsApp}
@@ -268,19 +250,12 @@ export default function App() {
         )}
       </main>
 
-      {/* 16. Premium Multi-Column Footer */}
+      {/* Footer */}
       <FooterSection
         onNavigateSection={handleNavigateSection}
-        onOpenDonation={handleOpenDonation}
+        onOpenTestDrive={() => handleOpenTestDrive()}
+        onOpenFranchise={() => setIsFranchiseOpen(true)}
       />
-
-      {/* Backup Modal for Quick Donation */}
-      {isDonationOpen && (
-        <DonationModal
-          isOpen={isDonationOpen}
-          onClose={() => setIsDonationOpen(false)}
-        />
-      )}
 
       {/* Dealership / Franchise Application Modal */}
       {isFranchiseOpen && (
@@ -302,4 +277,3 @@ export default function App() {
     </div>
   );
 }
-

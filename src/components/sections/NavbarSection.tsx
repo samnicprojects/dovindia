@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Heart, Menu, X, ChevronDown, Sparkles, MessageCircle, Phone, ArrowRight, ShieldCheck, ChevronRight, User, LogIn, LogOut } from 'lucide-react';
+import { Heart, Menu, X, ChevronDown, Sparkles, MessageCircle, Phone, ArrowRight, ShieldCheck, ChevronRight, User, LogIn, LogOut, Zap, Gauge } from 'lucide-react';
 import { PageMode } from '../../types';
 import { PROGRAMMES_DATA } from '../../data/programmes';
 import { Button } from '../ui/ReusableComponents';
@@ -112,10 +112,10 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="bg-[#22C55E]/20 text-[#22C55E] px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#22C55E]/30">
-              PM E-DRIVE 2026 & 80G Certified
+              PM E-DRIVE 2026 Subsidy Approved
             </span>
             <span className="hidden sm:inline text-slate-300">
-              Registered Section 8 Non-Profit Foundation • 100% Tax Deductible Receipts
+              EV DOVINDIA Mobility Portal • Swappable LFP Smart Battery Vehicles
             </span>
           </div>
 
@@ -201,6 +201,19 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
               EV DOVINDIA
             </button>
 
+            {/* PRODUCTS (BIKES) */}
+            <button
+              onClick={() => handleNavClick('products')}
+              className={`px-2.5 py-2 rounded-lg transition-colors cursor-pointer flex items-center gap-1 ${
+                currentMode === 'products'
+                  ? 'text-[#165DFF] bg-blue-50/80'
+                  : 'hover:text-[#165DFF] hover:bg-slate-50'
+              }`}
+            >
+              <span>PRODUCTS</span>
+              <span className="bg-orange-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-extrabold">NEW</span>
+            </button>
+
             {/* 3. CSR */}
             <div
               className="relative"
@@ -211,7 +224,7 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
               <button
                 onClick={() => setProgrammesDropdownOpen(!programmesDropdownOpen)}
                 className={`px-2.5 py-2 rounded-lg transition-colors flex items-center gap-1 cursor-pointer ${
-                  currentMode === 'programmes' || programmesDropdownOpen
+                  currentMode === 'programmes' || currentMode === 'what-we-do' || currentMode === 'emergency' || programmesDropdownOpen
                     ? 'text-[#165DFF] bg-blue-50/80'
                     : 'hover:text-[#165DFF] hover:bg-slate-50'
                 }`}
@@ -230,6 +243,28 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
                     className="absolute top-full left-0 mt-1 w-72 bg-white border border-slate-200 rounded-2xl shadow-xl p-2 z-50 normal-case"
                   >
                     <div className="flex flex-col space-y-1">
+                      <button
+                        onClick={() => handleNavClick('what-we-do')}
+                        className={`w-full text-left px-3.5 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
+                          currentMode === 'what-we-do'
+                            ? 'text-[#165DFF] bg-blue-50/80'
+                            : 'text-slate-700 hover:text-[#165DFF] hover:bg-slate-100'
+                        }`}
+                      >
+                        WHAT WE DO
+                      </button>
+                      <button
+                        onClick={() => handleNavClick('emergency')}
+                        className={`w-full text-left px-3.5 py-2 text-xs font-bold rounded-xl transition-colors cursor-pointer ${
+                          currentMode === 'emergency'
+                            ? 'text-[#165DFF] bg-blue-50/80'
+                            : 'text-slate-700 hover:text-[#165DFF] hover:bg-slate-100'
+                        }`}
+                      >
+                        EMERGENCY CASE
+                      </button>
+                      <div className="border-t border-slate-100 my-1"></div>
+                      <div className="px-3.5 py-1 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">CSR Initiatives</div>
                       {PROGRAMMES_DATA.map((prog) => (
                         <button
                           key={prog.id}
@@ -289,29 +324,7 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
               </AnimatePresence>
             </div>
 
-            {/* 5. WHAT WE DO */}
-            <button
-              onClick={() => handleNavClick('what-we-do')}
-              className={`px-2.5 py-2 rounded-lg transition-colors cursor-pointer ${
-                currentMode === 'what-we-do'
-                  ? 'text-[#165DFF] bg-blue-50/80'
-                  : 'hover:text-[#165DFF] hover:bg-slate-50'
-              }`}
-            >
-              WHAT WE DO
-            </button>
 
-            {/* 6. EMERGENCY CASE */}
-            <button
-              onClick={() => handleNavClick('emergency')}
-              className={`px-2.5 py-2 rounded-lg transition-colors cursor-pointer ${
-                currentMode === 'emergency'
-                  ? 'text-[#165DFF] bg-blue-50/80'
-                  : 'hover:text-[#165DFF] hover:bg-slate-50'
-              }`}
-            >
-              EMERGENCY CASE
-            </button>
 
             {/* 7. BANK DETAILS */}
             <button
@@ -340,14 +353,12 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
 
           {/* Action CTAs */}
           <div className="hidden sm:flex items-center gap-3 shrink-0">
-            <Button
-              variant="secondary"
-              size="md"
-              icon={Heart}
-              onClick={() => onOpenDonation()}
+            <button
+              onClick={() => handleNavClick('products')}
+              className="px-4 py-2 bg-gradient-to-r from-[#EA580C] to-[#f97316] hover:from-[#c2410c] hover:to-[#ea580c] text-white font-extrabold text-xs rounded-xl shadow-md flex items-center gap-1.5 transition-all cursor-pointer uppercase tracking-wider"
             >
-              Donate Now
-            </Button>
+              <Zap className="w-4 h-4 text-amber-300" /> Reserve Scooter (₹999)
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -381,6 +392,14 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
                   <ChevronRight className="w-4 h-4 text-slate-400" />
                 </button>
 
+                <button onClick={() => handleNavClick('products')} className="w-full text-left px-3 py-2.5 rounded-xl font-bold text-slate-800 hover:bg-slate-50 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span>PRODUCTS (BIKES)</span>
+                    <span className="bg-orange-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-extrabold">NEW</span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                </button>
+
                 {/* Mobile Programmes Accordion */}
                 <div>
                   <button onClick={() => setMobileProgrammesOpen(!mobileProgrammesOpen)} className="w-full text-left px-3 py-2.5 rounded-xl font-bold text-slate-800 hover:bg-slate-50 flex items-center justify-between">
@@ -388,9 +407,17 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
                     <ChevronDown className={`w-4 h-4 transition-transform ${mobileProgrammesOpen ? 'rotate-180' : ''}`} />
                   </button>
                   {mobileProgrammesOpen && (
-                    <div className="mt-1 pl-3 space-y-1 bg-slate-50 p-2 rounded-xl border border-slate-200 font-bold max-h-48 overflow-y-auto normal-case">
+                    <div className="mt-1 pl-3 space-y-1 bg-slate-50 p-2 rounded-xl border border-slate-200 font-bold max-h-60 overflow-y-auto">
+                      <button onClick={() => handleNavClick('what-we-do')} className="w-full text-left p-2 rounded-lg hover:bg-white text-slate-700 uppercase">
+                        WHAT WE DO
+                      </button>
+                      <button onClick={() => handleNavClick('emergency')} className="w-full text-left p-2 rounded-lg hover:bg-white text-slate-700 uppercase">
+                        EMERGENCY CASE
+                      </button>
+                      <div className="border-t border-slate-200 my-1"></div>
+                      <div className="px-2 py-0.5 text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">CSR Initiatives</div>
                       {PROGRAMMES_DATA.map((prog) => (
-                        <button key={prog.id} onClick={() => handleNavClick('programmes', prog.id)} className="w-full text-left p-2 rounded-lg hover:bg-white text-slate-700">
+                        <button key={prog.id} onClick={() => handleNavClick('programmes', prog.id)} className="w-full text-left p-2 rounded-lg hover:bg-white text-slate-700 normal-case">
                           {prog.title}
                         </button>
                       ))}
@@ -415,16 +442,6 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
                   )}
                 </div>
 
-                <button onClick={() => handleNavClick('what-we-do')} className="w-full text-left px-3 py-2.5 rounded-xl font-bold text-slate-800 hover:bg-slate-50 flex items-center justify-between">
-                  <span>WHAT WE DO</span>
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
-                </button>
-
-                <button onClick={() => handleNavClick('emergency')} className="w-full text-left px-3 py-2.5 rounded-xl font-bold text-slate-800 hover:bg-slate-50 flex items-center justify-between">
-                  <span>EMERGENCY CASE</span>
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
-                </button>
-
                 <button onClick={() => handleNavClick('bank-details')} className="w-full text-left px-3 py-2.5 rounded-xl font-bold text-slate-800 hover:bg-slate-50 flex items-center justify-between">
                   <span>BANK DETAILS</span>
                   <ChevronRight className="w-4 h-4 text-slate-400" />
@@ -437,12 +454,18 @@ export const NavbarSection: React.FC<NavbarSectionProps> = ({
               </div>
 
               <div className="pt-2 grid grid-cols-2 gap-2">
-                <Button variant="outline" size="sm" onClick={() => { setMobileMenuOpen(false); onOpenVolunteer(); }}>
-                  Volunteer
-                </Button>
-                <Button variant="secondary" size="sm" icon={Heart} onClick={() => { setMobileMenuOpen(false); onOpenDonation(); }}>
-                  Donate Now
-                </Button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleNavClick('products'); }}
+                  className="w-full py-2.5 bg-[#1E3A8A] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 uppercase"
+                >
+                  <Gauge className="w-4 h-4 text-cyan-300" /> Test Drive
+                </button>
+                <button
+                  onClick={() => { setMobileMenuOpen(false); handleNavClick('products'); }}
+                  className="w-full py-2.5 bg-[#EA580C] text-white text-xs font-bold rounded-xl flex items-center justify-center gap-1 uppercase"
+                >
+                  <Zap className="w-4 h-4 text-amber-300" /> Reserve ₹999
+                </button>
               </div>
             </motion.div>
           )}

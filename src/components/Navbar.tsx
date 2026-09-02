@@ -4,6 +4,7 @@ import { PROGRAMMES_DATA } from '../data/programmes';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Zap,
+  Gauge,
   HeartHandshake,
   Menu,
   X,
@@ -123,7 +124,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <span className="bg-[#22C55E]/20 text-[#22C55E] px-2 py-0.5 rounded-full border border-[#22C55E]/30 text-[10px] font-semibold uppercase tracking-wider bg-emerald-950/40">
-              PM E-DRIVE 2026 & 80G Certified
+              PM E-DRIVE 2026 Subsidy Approved
             </span>
 
           </div>
@@ -193,6 +194,15 @@ export const Navbar: React.FC<NavbarProps> = ({
             EV DOVINDIA
           </button>
 
+          {/* PRODUCTS (BIKES) */}
+          <button
+            onClick={() => handleNavClick('products')}
+            className={`px-2.5 py-2 rounded-lg transition-colors text-xs font-black uppercase tracking-wider flex items-center gap-1 ${currentMode === 'products' ? 'text-[#1E3A8A] bg-gray-100' : 'hover:text-[#1E3A8A] hover:bg-gray-50'}`}
+          >
+            <span>PRODUCTS</span>
+            <span className="bg-orange-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-extrabold">NEW</span>
+          </button>
+
           {/* 3. CSR */}
           <div
             className="relative"
@@ -204,7 +214,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               onClick={() => {
                 setMegaMenuOpen(!megaMenuOpen);
               }}
-              className={`px-2.5 py-2 rounded-lg transition-all flex items-center gap-1 text-xs font-black uppercase tracking-wider ${currentMode === 'programmes' || megaMenuOpen
+              className={`px-2.5 py-2 rounded-lg transition-all flex items-center gap-1 text-xs font-black uppercase tracking-wider ${currentMode === 'programmes' || currentMode === 'what-we-do' || currentMode === 'emergency' || megaMenuOpen
                 ? 'text-[#1E3A8A] bg-gray-100'
                 : 'hover:text-[#1E3A8A] hover:bg-gray-50'
                 }`}
@@ -225,6 +235,24 @@ export const Navbar: React.FC<NavbarProps> = ({
                   className="absolute top-full left-0 mt-1 w-72 bg-white border border-gray-200 rounded-xl shadow-lg p-2 z-50 text-[#1F2937] normal-case"
                 >
                   <div className="flex flex-col space-y-0.5">
+                    <button
+                      onClick={() => handleNavClick('what-we-do')}
+                      className={`w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors ${
+                        currentMode === 'what-we-do' ? 'text-[#1E3A8A] bg-gray-100' : 'text-[#374151] hover:text-[#1E3A8A] hover:bg-gray-100'
+                      }`}
+                    >
+                      WHAT WE DO
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('emergency')}
+                      className={`w-full text-left px-3 py-2 text-xs font-bold uppercase tracking-wider rounded-lg transition-colors ${
+                        currentMode === 'emergency' ? 'text-[#1E3A8A] bg-gray-100' : 'text-[#374151] hover:text-[#1E3A8A] hover:bg-gray-100'
+                      }`}
+                    >
+                      EMERGENCY CASE
+                    </button>
+                    <div className="border-t border-gray-100 my-1"></div>
+                    <div className="px-3 py-1 text-[10px] font-extrabold text-gray-400 uppercase tracking-wider">CSR Initiatives</div>
                     {PROGRAMMES_DATA.map((prog) => (
                       <button
                         key={prog.id}
@@ -307,21 +335,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </AnimatePresence>
           </div>
 
-          {/* 5. WHAT WE DO */}
-          <button
-            onClick={() => handleNavClick('what-we-do')}
-            className={`px-2.5 py-2 rounded-lg transition-colors text-xs font-black uppercase tracking-wider ${currentMode === 'what-we-do' ? 'text-[#1E3A8A] bg-gray-100' : 'hover:text-[#1E3A8A] hover:bg-gray-50'}`}
-          >
-            WHAT WE DO
-          </button>
 
-          {/* 6. EMERGENCY CASE */}
-          <button
-            onClick={() => handleNavClick('emergency')}
-            className={`px-2.5 py-2 rounded-lg transition-colors text-xs font-black uppercase tracking-wider ${currentMode === 'emergency' ? 'text-[#1E3A8A] bg-gray-100' : 'hover:text-[#1E3A8A] hover:bg-gray-50'}`}
-          >
-            EMERGENCY CASE
-          </button>
 
           {/* 7. BANK DETAILS */}
           <button
@@ -343,21 +357,21 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Action CTAs (Desktop) */}
         <div className="hidden lg:flex items-center gap-2">
           <button
-            onClick={onOpenDonation}
-            className="btn-donate text-xs py-2 px-4 shadow-sm"
+            onClick={() => onNavigate('products')}
+            className="px-4 py-2 bg-gradient-to-r from-[#EA580C] to-[#f97316] hover:from-[#c2410c] hover:to-[#ea580c] text-white font-black text-xs rounded-xl shadow-sm flex items-center gap-1.5 transition-all cursor-pointer uppercase tracking-wider"
           >
-            <HeartHandshake className="w-4 h-4" />
-            Donate Now
+            <Zap className="w-4 h-4 text-amber-300" />
+            Reserve Scooter (₹999)
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="flex xl:hidden items-center gap-2">
           <button
-            onClick={onOpenDonation}
-            className="btn-donate text-xs py-1.5 px-3"
+            onClick={() => onNavigate('products')}
+            className="px-3 py-1.5 bg-[#EA580C] text-white text-xs font-black rounded-lg flex items-center gap-1 uppercase"
           >
-            Donate
+            <Zap className="w-3.5 h-3.5 text-amber-300" /> Reserve
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -395,14 +409,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                 <ChevronRight className="w-4 h-4 text-gray-400" />
               </button>
 
-              <button
-                onClick={() => handleNavClick('what-we-do')}
-                className="w-full text-left px-3 py-2 rounded-lg text-[#1F2937] hover:bg-slate-50 flex items-center justify-between"
-              >
-                <span>What We Do</span>
-                <ChevronRight className="w-4 h-4 text-gray-400" />
-              </button>
-
               {/* Mobile Programmes Accordion */}
               <div>
                 <button
@@ -415,6 +421,20 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                 {mobileProgrammesOpen && (
                   <div className="mt-2 pl-3 space-y-1 bg-[#F8FAFC] p-2 rounded-xl border border-gray-200 text-xs max-h-60 overflow-y-auto">
+                    <button
+                      onClick={() => handleNavClick('what-we-do')}
+                      className="w-full text-left p-2 rounded-lg hover:bg-gray-100 text-[#1F2937] font-bold uppercase"
+                    >
+                      What We Do
+                    </button>
+                    <button
+                      onClick={() => handleNavClick('emergency')}
+                      className="w-full text-left p-2 rounded-lg hover:bg-gray-100 text-[#1F2937] font-bold uppercase"
+                    >
+                      Emergency Case
+                    </button>
+                    <div className="border-t border-gray-200 my-1"></div>
+                    <div className="px-2 py-0.5 text-[10px] font-extrabold text-gray-400 uppercase tracking-wider">CSR Initiatives</div>
                     {PROGRAMMES_DATA.map((prog) => (
                       <button
                         key={prog.id}
@@ -427,14 +447,6 @@ export const Navbar: React.FC<NavbarProps> = ({
                   </div>
                 )}
               </div>
-
-              <button
-                onClick={() => handleNavClick('emergency')}
-                className="w-full text-left px-3 py-2 rounded-lg text-[#1F2937] hover:bg-slate-50 flex items-center justify-between"
-              >
-                <span>Emergency Cases</span>
-                <ChevronRight className="w-4 h-4 text-gray-400" />
-              </button>
 
               <button
                 onClick={() => handleNavClick('bank-details')}
@@ -453,6 +465,17 @@ export const Navbar: React.FC<NavbarProps> = ({
               </button>
 
               <button
+                onClick={() => handleNavClick('products')}
+                className="w-full text-left px-3 py-2 rounded-lg text-[#1F2937] hover:bg-slate-50 flex items-center justify-between"
+              >
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold">Products (Bikes)</span>
+                  <span className="bg-orange-500 text-white text-[9px] px-1.5 py-0.2 rounded-full font-extrabold">NEW</span>
+                </div>
+                <ChevronRight className="w-4 h-4 text-gray-400" />
+              </button>
+
+              <button
                 onClick={() => handleNavClick('contact')}
                 className="w-full text-left px-3 py-2 rounded-lg text-[#1F2937] hover:bg-slate-50 flex items-center justify-between"
               >
@@ -466,13 +489,13 @@ export const Navbar: React.FC<NavbarProps> = ({
                 onClick={() => { setMobileMenuOpen(false); onOpenTestDrive(); }}
                 className="btn-primary w-full text-xs py-2.5"
               >
-                <Zap className="w-4 h-4" /> Book Test Drive
+                <Gauge className="w-4 h-4" /> Book Test Drive
               </button>
               <button
-                onClick={() => { setMobileMenuOpen(false); onOpenDonation(); }}
-                className="btn-donate w-full text-xs py-2.5"
+                onClick={() => { setMobileMenuOpen(false); onNavigate('products'); }}
+                className="w-full py-2.5 bg-[#EA580C] text-white font-extrabold text-xs rounded-xl flex items-center justify-center gap-1 uppercase"
               >
-                <HeartHandshake className="w-4 h-4" /> Donate (80G)
+                <Zap className="w-4 h-4 text-amber-300" /> Reserve ₹999
               </button>
             </div>
           </motion.div>

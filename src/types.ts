@@ -6,6 +6,7 @@ export type PageMode =
   | 'emergency' 
   | 'bank-details' 
   | 'ev' 
+  | 'products'
   | 'contact' 
   | 'csr' 
   | 'projects' 

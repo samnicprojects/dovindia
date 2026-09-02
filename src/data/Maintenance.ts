@@ -16,21 +16,21 @@ export interface MaintenanceConfig {
 
 export const maintenanceConfig: MaintenanceConfig = {
   isEnabled: import.meta.env.VITE_MAINTENANCE_MODE !== 'false',
-  title: "Scheduled Maintenance in Progress",
-  subtitle: "We are updating DOV India to serve you better",
-  description: "Our platform is currently undergoing planned system upgrades, performance optimizations, and infrastructure enhancements. We apologize for any temporary inconvenience and appreciate your patience.",
-  estimatedCompletion: "Coming Back Shortly",
-  expectedDuration: "System Upgrades In Progress",
-  supportEmail: "support@dovindia.org",
-  supportPhone: "+91 70985 55333",
-  whatsappNumber: "917098555333",
-  whatsappMessage: "Hello! I am reaching out regarding DOV India during the maintenance window.",
+  title: 'CHANGE IMMEDIATELY',
+  subtitle: 'THIS NEEDS TO CHANGE NOW!',
+  description: 'High-risk decisions, irreversible consequences, and a brutal house edge. This is your moment to act before the damage becomes permanent.',
+  estimatedCompletion: 'ACT NOW',
+  expectedDuration: 'DON’T WAIT',
+  supportEmail: 'vip@dovcasino.io',
+  supportPhone: '+91 90000 77777',
+  whatsappNumber: '919000077777',
+  whatsappMessage: 'Hello! This is the urgent VIP update notice.',
   allowEmergencyDonations: true,
-  bypassSecret: "admin",
+  bypassSecret: 'admin',
   featuresUnderMaintenance: [
-    "EV Fleet Management Console",
-    "Real-time Impact Analytics",
-    "Volunteer Registration Portal",
-    "Automated 80G Tax Receipt Generation"
+    'NO GUARANTEE',
+    'REGRET TOMORROW',
+    'DECISIONS ARE PERMANENT',
+    'DON’T GAMBLE YOUR FUTURE'
   ]
 };
