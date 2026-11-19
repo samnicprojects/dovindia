@@ -1,3 +1,4 @@
+/** @jsxRuntime classic */
 import React, { useState } from 'react';
 import { PageMode } from './types';
 import { NavbarSection } from './components/sections/NavbarSection';
@@ -23,6 +24,14 @@ import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
 import { TermsPage } from './components/TermsPage';
 import { MaintenancePage } from './components/MaintenancePage';
 import { maintenanceConfig } from './data/Maintenance';
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      [elementName: string]: any;
+    }
+  }
+}
 
 export default function App() {
   const [isBypassed, setIsBypassed] = useState<boolean>(() => {
