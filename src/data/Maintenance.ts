@@ -14,8 +14,14 @@ export interface MaintenanceConfig {
   featuresUnderMaintenance: string[];
 }
 
+const maintenanceMode = import.meta.env.VITE_MAINTENANCE_MODE?.trim().toLowerCase();
+const isMaintenanceModeDisabled =
+  maintenanceMode === 'false' || maintenanceMode === '0' || maintenanceMode === 'off';
+
 export const maintenanceConfig: MaintenanceConfig = {
-  isEnabled: import.meta.env.VITE_MAINTENANCE_MODE === 'true',
+  // Fail safely so maintenance is shown if a deployment forgets to set the variable.
+  // Set VITE_MAINTENANCE_MODE=false in the production build environment to disable it.
+  isEnabled: !isMaintenanceModeDisabled,
   title: 'Under Scheduled Maintenance',
   subtitle: 'We are upgrading our portal for a better experience.',
   description: 'Our site is currently undergoing scheduled maintenance to bring you new features and improvements.',

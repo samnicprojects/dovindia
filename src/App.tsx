@@ -47,9 +47,11 @@ export default function App() {
 
     if (bypassParam === maintenanceConfig.bypassSecret.toLowerCase() || bypassParam === 'true' || adminParam === 'true') {
       sessionStorage.setItem('dov_maintenance_bypass', 'true');
+      localStorage.removeItem('dov_maintenance_bypass');
       return true;
     }
-    return sessionStorage.getItem('dov_maintenance_bypass') === 'true' || localStorage.getItem('dov_maintenance_bypass') === 'true';
+    localStorage.removeItem('dov_maintenance_bypass');
+    return sessionStorage.getItem('dov_maintenance_bypass') === 'true';
   });
 
   const [currentMode, setCurrentMode] = useState<PageMode>('home');
